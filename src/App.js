@@ -1,25 +1,99 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css'
+import './component/listOfItem.css'
+import ListOfItems from './component/listOfItems'
+
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      itemArray: [],
+      inputedItem: {
+        text: '',
+        key: '',
+        complited: false,
+      },
+    }
+    this.inputingHandler = this.inputingHandler.bind(this)
+    this.addInputing = this.addInputing.bind(this)
+    this.changeValue = this.changeValue.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
+  }
+
+
+  addInputing(e) {
+    e.preventDefault()
+    const newItem = this.state.inputedItem
+    console.log(newItem)
+
+    if (newItem.text !== '') {
+      const addItem = [...this.state.itemArray, newItem]
+      this.setState({
+        itemArray: addItem,
+        inputedItem: {
+          text: '',
+          key: '',
+        },
+      })
+    }
+  }
+
+  inputingHandler(e) {
+    this.setState({
+      inputedItem: {
+        text: e.target.value,
+        key: Date.now(),
+      },
+    })
+  }
+  changeValue(text, key) {
+    const changeValues = this.state.itemArray
+
+    // eslint-disable-next-line
+    changeValues.map((changeValue) => {
+      if (changeValue.key === key) {
+        changeValue.text = text
+        
+      }
+    })
+    this.setState({
+      itemArray: changeValues,
+    })
+   
+    
+  }
+
+  deleteItem(key) {
+    const itemsToDelete = this.state.itemArray.filter(
+      (itemToDelete) => itemToDelete.key !== key
+    )
+    this.setState({
+      itemArray: itemsToDelete,
+    })
+  }
+
+  render() {
+    const { inputedItem } = this.state
+    return (
+      <div className="App">
+        <header>
+          <form id="to-do-form" onSubmit={this.addInputing}>
+            <input
+              type="text"
+              placeholder="Add a todo"
+              value={inputedItem.text}
+              onChange={this.inputingHandler}
+            />
+            <button type="submit">Add todo</button>
+          </form>
+        </header>
+        <ListOfItems
+          items={this.state.itemArray}
+          deleteItem={this.deleteItem}
+          changeValue={this.changeValue}
+        />
+      </div>
+    )
+  }
 }
-
-export default App;

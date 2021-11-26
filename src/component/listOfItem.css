@@ -1,0 +1,58 @@
+.list {
+  width: 300px;
+  height: 50px;
+  margin-bottom: 5px;
+  /* background-color: red; */
+  background: #00b09b;  
+background: -webkit-linear-gradient(to right, #96c93d, #00b09b);  
+background: linear-gradient(to right, #96c93d, #00b09b); 
+
+  border-radius: 10px;
+  margin: 20px auto;
+}
+.list p {
+  padding: 10px;
+  position: relative;
+}
+
+.list p span{
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+
+.list p input {
+  background-color: transparent;
+  border: 0px;
+  color: white;
+  font-size: 18px;
+}
+.list p input:focus{
+    outline: 0px;
+}
+
+.list p .check{
+  margin-right: 5px;
+}
+
+.no-todos {
+  position: relative;
+ left: 15%;
+  width: 70%;
+  height: 50px;
+  border: 1px solid red;
+  border-radius: 15px;
+  background: #00F260;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0575E6, #00F260);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #0575E6, #00F260); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.no-todos h3{
+position: absolute;
+font-size: 18px;
+color: seashell;
+left: 35%;
+top: 10px;
+}
+
+
